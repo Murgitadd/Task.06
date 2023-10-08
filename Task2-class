@@ -1,0 +1,107 @@
+using System;
+
+namespace CodingOlympics
+{
+    class Competitor
+    {
+        public string Name;
+        public int Score;
+
+        public Competitor(string name)
+        {
+            Name = name;
+            Score = 0;
+        }
+
+        public void Rate()
+        {
+            Console.Write($"Rate {Name}: ");
+            int points = int.Parse(Console.ReadLine());
+            Score += points;
+        }
+
+        public void ResetScore()
+        {
+            Score = 0;
+        }
+    }
+
+    class Game
+    {
+        private Competitor competitor1;
+        private Competitor competitor2;
+        private int numberOfRounds;
+
+        public Game(string competitor1Name, string competitor2Name, int rounds)
+        {
+            competitor1 = new Competitor(competitor1Name);
+            competitor2 = new Competitor(competitor2Name);
+            numberOfRounds = rounds;
+        }
+
+        public void Play()
+        {
+            Console.WriteLine("Welcome to the Great Olympics of AB104!");
+
+            for (int round = 1; round <= numberOfRounds; round++)
+            {
+                Console.WriteLine($"~~~~Round {round} of 3~~~~");
+
+                competitor1.ResetScore();
+                competitor2.ResetScore();
+
+                competitor1.Rate();
+                competitor2.Rate();
+
+                if (competitor1.Score > competitor2.Score)
+                {
+                    Console.WriteLine($"{competitor1.Name} wins this round!");
+                }
+                else if (competitor2.Score > competitor1.Score)
+                {
+                    Console.WriteLine($"{competitor2.Name} wins this round!");
+                }
+                else
+                {
+                    Console.WriteLine("It's a tie!");
+                }
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Game Over!");
+
+            DeclareWinner(competitor1.Name, competitor2.Name, competitor1.Score, competitor2.Score);
+        }
+
+        static void DeclareWinner(string competitor1Name, string competitor2Name, int score1, int score2)
+        {
+            if (score1 > score2)
+            {
+                Console.WriteLine($"{competitor1Name} wins with a total score of {score1}!");
+            }
+            else if (score2 > score1)
+            {
+                Console.WriteLine($"{competitor2Name} wins with a total score of {score2}!");
+            }
+            else
+            {
+                Console.WriteLine("It's a tie!");
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string competitor1Name = "Rashad";
+            string competitor2Name = "Aydan";
+            int numberOfRounds = 3;
+
+            Game game = new Game(competitor1Name, competitor2Name, numberOfRounds);
+            game.Play();
+        }
+    }
+}
+
