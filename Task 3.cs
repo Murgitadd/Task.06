@@ -1,44 +1,84 @@
-
-
-
-
-
-//I couldn't :(
-
-
-
-
-
-
-
 using System;
 
 class Program
 {
     static void Main()
     {
-        Console.WriteLine("Enter a sentence:");
-        string inputSentence = Console.ReadLine();
+        Console.WriteLine("Enter a Sentence: ");
+        string sentence = Console.ReadLine();
 
-        string[] words = CollectWords(inputSentence);
+        int maxWordCount = 2;
+        string[] words = new string[maxWordCount];
+
+        int wordCount = 0;
+        string currentWord = "";
+        bool insideWord = false;
+
+        for (int i = 0; i < sentence.Length; i++)
+        {
+            char c = sentence[i];
+
+            if (c == ' ')
+            {
+                if (insideWord)
+                {
+                    if (wordCount >= maxWordCount)
+                    {
+                        
+                        string[] newWords = new string[maxWordCount * 2];
+                        
+                        
+                        for (int j = 0; j < maxWordCount; j++)
+                        {
+                            newWords[j] = words[j];
+                        }
+                        
+                        
+                        maxWordCount *= 2;
+                        
+                        
+                        words = newWords;
+                    }
+
+                    words[wordCount] = currentWord;
+                    wordCount++;
+                    currentWord = "";
+                    insideWord = false;
+                }
+            }
+            else
+            {
+                currentWord += c;
+                insideWord = true;
+            }
+        }
+
+        if (insideWord)
+        {
+            if (wordCount >= maxWordCount)
+            {
+                
+                string[] newWords = new string[maxWordCount * 2];
+                
+               
+                for (int j = 0; j < maxWordCount; j++)
+                {
+                    newWords[j] = words[j];
+                }
+                
+                
+                maxWordCount *= 2;
+                
+                
+                words = newWords;
+            }
+
+            words[wordCount] = currentWord;
+            wordCount++;
+        }
 
         Console.WriteLine("Words in the sentence:");
-        PrintWords(words);
-    }
-
-    static string[] CollectWords(string sentence)
-    {
-        return words;
-    }
-
-    static int CountWords(string sentence)
-    {
-        return wordCount;
-    }
-
-    static void PrintWords(string[] words)
-    {
-        for (int i = 0; i < words.Length; i++)
+        for (int i = 0; i < wordCount; i++)
         {
             Console.WriteLine(words[i]);
         }
