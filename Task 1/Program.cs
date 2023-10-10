@@ -12,14 +12,14 @@ namespace codek
             Console.WriteLine("Student 1 Info:");
             student1.GetInfo();
 
-            Console.WriteLine("\nStudent 2 Info:");
+            Console.WriteLine("Student 2 Info:");
             student2.GetInfo();
 
-            Console.WriteLine("\nChecking Graduation Status:");
+            Console.WriteLine("Checking Graduation Status:");
             student1.CheckGraduation();
             student2.CheckGraduation();
 
-            Console.WriteLine("\nDiploma Degrees:");
+            Console.WriteLine("Diploma Degrees:");
             student1.GetDiplomDegree();
             student2.GetDiplomDegree();
         }
